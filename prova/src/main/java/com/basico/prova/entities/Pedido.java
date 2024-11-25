@@ -11,8 +11,10 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private LocalDate dataPedido;
+    private Double preco;
 
+    @ManyToMany
+    private List<Produto> produtos;
 
     // Getters and setters
     public Long getId() {
@@ -23,12 +25,19 @@ public class Pedido {
         this.id = id;
     }
 
-    public LocalDate getDataPedido() {
-        return dataPedido;
+    public Double getPreco() {
+        return preco;
     }
 
-    public void setDataPedido(LocalDate dataPedido) {
-        this.dataPedido = dataPedido;
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
 }

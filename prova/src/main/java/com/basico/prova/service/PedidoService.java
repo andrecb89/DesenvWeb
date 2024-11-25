@@ -32,7 +32,8 @@ public class PedidoService {
 
         public Pedido atualizar(Long id, Pedido pedido) {
             Pedido novoPedido = pedidoRepository.getOne(id);
-            novoPedido.setDataPedido(pedido.getDataPedido());
+            novoPedido.setPreco(pedido.getPreco());
+            novoPedido.setProdutos(pedido.getProdutos());
             return pedidoRepository.save(novoPedido);}
 
         public void deletar(Long id) {
