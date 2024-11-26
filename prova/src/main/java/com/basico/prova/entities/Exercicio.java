@@ -6,15 +6,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import static jakarta.persistence.GenerationType.*;
+
 @Entity
-public class Produto {
+public class Exercicio {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nome;
-    private Double preco;
+    private String nomeExercicio;
 
-    // Getters and setters
+
     public Long getId() {
         return id;
     }
@@ -23,19 +25,11 @@ public class Produto {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeExercicio() {
+        return nomeExercicio;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
+    public void setNomeExercicio(String nomeExercicio) {
+        this.nomeExercicio = nomeExercicio;
     }
 }
