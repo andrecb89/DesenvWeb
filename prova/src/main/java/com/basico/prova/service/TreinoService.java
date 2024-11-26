@@ -1,5 +1,6 @@
 package com.basico.prova.service;
 
+import com.basico.prova.entities.AtualizaStatusDTO;
 import com.basico.prova.entities.Treino;
 import com.basico.prova.repository.TreinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,20 @@ public class TreinoService {
         return treinoRepository.findById(id);
     }
 
+    public Optional<Treino> encontrarPorStatus(String status) {
+        return treinoRepository.findAllByStatus(status);
+    }
+
+
     public Treino salvar(Treino treino) {
         Treino treinoSalvo = treinoRepository.save(treino);
-        return treinoSalvo;
+        if(treinoSalvo.getStatus() == "Ativo" || treinoSalvo.getStatus() == "Vencidos" || treinoSalvo.getStatus() == "Completo") {
+            return treinoSalvo;
+        } else {
+            throw  new RuntimeException();
+        }
     }
+
 
     public Treino atualizar(Long id, Treino treino) {
         Treino novoTreino = treinoRepository.getOne(id);
@@ -37,6 +48,13 @@ public class TreinoService {
         novoTreino.setStatus(treino.getStatus());
         novoTreino.setExercicios(treino.getExercicios());
         return treinoRepository.save(novoTreino);}
+
+    public Treino atualizarStatus(Long id, AtualizaStatusDTO atualizaStatusDTO) {
+        Treino novoTreino = treinoRepository.getOne(id);
+        novoTreino.setStatus(atualizaStatusDTO.getStatus());
+        return treinoRepository.save(novoTreino);}
+
+
 
     public void deletar(Long id) {
         treinoRepository.deleteById(id);
