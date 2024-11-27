@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -25,14 +26,15 @@ public class TreinoService {
         return treinoRepository.findById(id);
     }
 
-    public Optional<Treino> encontrarPorStatus(String status) {
+    public Optional<List<Treino>> encontrarPorStatus(String status) {
         return treinoRepository.findAllByStatus(status);
     }
 
 
     public Treino salvar(Treino treino) {
-        Treino treinoSalvo = treinoRepository.save(treino);
-        if(treinoSalvo.getStatus() == "Ativo" || treinoSalvo.getStatus() == "Vencidos" || treinoSalvo.getStatus() == "Completo") {
+        Treino treinoSalvo = treino;
+        if(Objects.equals(treinoSalvo.getStatus(), "Ativo") || Objects.equals(treinoSalvo.getStatus(), "Vencidos") || Objects.equals(treinoSalvo.getStatus(), "Completo")) {
+            treinoSalvo = treinoRepository.save(treino);
             return treinoSalvo;
         } else {
             throw  new RuntimeException();

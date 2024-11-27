@@ -28,7 +28,7 @@ public class TreinoController {
     }
 
     @GetMapping("/porstatus/{status}")
-    public Optional<Treino> encontrarTreinoPorStatus(@PathVariable String status) {
+    public Optional<List<Treino>> encontrarTreinoPorStatus(@PathVariable String status) {
         return treinoService.encontrarPorStatus(status);
     }
 
@@ -37,15 +37,17 @@ public class TreinoController {
         return treinoService.salvar(treino);
     }
 
-    @PutMapping("/alterar/{id}")
-    public Treino alterarTreino(@PathVariable Long id,@RequestBody AtualizaStatusDTO atualizaStatusDTO) {
+    @PutMapping("/alterarstatus/{id}")
+    public Treino alterarStatus(@PathVariable Long id,@RequestBody AtualizaStatusDTO atualizaStatusDTO) {
         return treinoService.atualizarStatus(id, atualizaStatusDTO);
     }
 
-    @PutMapping("/status/{id}")
+
+    @PutMapping("/alterar/{id}")
     public Treino alterarTreino(@PathVariable Long id,@RequestBody Treino treino) {
         return treinoService.atualizar(id, treino);
     }
+
 
     @DeleteMapping("/{id}")
     public void deletarTreino(@PathVariable Long id) {
